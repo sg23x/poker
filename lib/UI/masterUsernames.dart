@@ -56,14 +56,15 @@ class _MasterUsernamesState extends State<MasterUsernames> {
     return StreamBuilder(
       builder: (context, snapshot) {
         players.clear();
+
+        if (!snapshot.hasData) {
+          return Scaffold();
+        }
         for (DocumentSnapshot doc in snapshot.data.documents) {
           players.insert(
             players.length,
             doc['username'],
           );
-        }
-        if (!snapshot.hasData) {
-          return Scaffold();
         }
         return Scaffold(
           resizeToAvoidBottomInset: false,
